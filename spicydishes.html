@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spicy Kitchen – Jaya Spicy Kitchen</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Georgia', serif;
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 70px 20px 40px;
             color: #f5e6d3;
         }
 
@@ -25,7 +21,7 @@
             margin: 0 auto;
             background: linear-gradient(180deg, #1a0f0f 0%, #2a1515 100%);
             border-radius: 20px;
-            padding: 50px 40px;
+            padding: 40px 40px 50px;
             box-shadow: 0 20px 60px rgba(200, 100, 100, 0.4),
                         0 0 40px rgba(218, 165, 32, 0.3);
             border: 2px solid rgba(200, 100, 100, 0.6);
@@ -37,21 +33,9 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        .back-link {
-            display: inline-block;
-            margin-bottom: 30px;
-            color: #DAA520;
-            text-decoration: none;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            transition: color 0.2s;
-        }
-
-        .back-link:hover { color: #C86464; }
-
         .header {
             text-align: center;
-            margin-bottom: 36px;
+            margin-bottom: 32px;
         }
 
         .header h1 {
@@ -99,14 +83,14 @@
 
         .slide img {
             width: 100%;
-            height: 480px;
+            height: 460px;
             object-fit: cover;
             display: block;
         }
 
         .slide-caption {
             padding: 14px 24px;
-            background: rgba(20, 5, 5, 0.75);
+            background: rgba(20, 5, 5, 0.82);
             color: #f5e6d3;
             font-size: 1.05rem;
             letter-spacing: 1px;
@@ -148,6 +132,7 @@
         .dots {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 8px;
             margin-top: 16px;
         }
@@ -167,17 +152,143 @@
             transform: scale(1.3);
         }
 
-        @media (max-width: 600px) {
-            .slide img { height: 280px; }
-            .container { padding: 36px 18px; }
-            .header h1 { font-size: 1.6rem; }
+        /* ── Burger navigation ── */
+        .burger-btn {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 2000;
+            background: rgba(26, 15, 15, 0.94);
+            border: 2px solid rgba(200, 100, 100, 0.6);
+            border-radius: 10px;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 0;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .burger-btn:hover {
+            background: rgba(200, 100, 100, 0.2);
+            border-color: rgba(200, 100, 100, 0.9);
+        }
+        .burger-line {
+            width: 22px;
+            height: 2px;
+            background: #DAA520;
+            border-radius: 2px;
+        }
+        .nav-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1900;
+            background: rgba(0, 0, 0, 0.55);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .nav-overlay.open { opacity: 1; pointer-events: all; }
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100%;
+            z-index: 1950;
+            background: linear-gradient(180deg, #1a0f0f 0%, #2a1515 100%);
+            border-right: 2px solid rgba(200, 100, 100, 0.5);
+            box-shadow: 8px 0 32px rgba(0,0,0,0.5);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            padding: 80px 0 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        .nav-drawer.open { transform: translateX(0); }
+        .nav-brand {
+            text-align: center;
+            padding: 0 24px 24px;
+            border-bottom: 1px solid rgba(200, 100, 100, 0.25);
+            margin-bottom: 12px;
+        }
+        .nav-brand-name {
+            font-size: 0.95rem;
+            color: #DAA520;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .nav-brand-tag { font-size: 0.72rem; color: #C86464; letter-spacing: 1px; margin-top: 4px; }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 15px 28px;
+            color: #f5e6d3;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+            border-left: 3px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: rgba(200, 100, 100, 0.15);
+            color: #DAA520;
+            border-left-color: #DAA520;
+        }
+        .nav-link-icon { font-size: 1.25rem; width: 26px; text-align: center; }
+
+        /* ── Responsive ── */
+        @media (max-width: 430px) {
+            body { padding: 70px 10px 30px; }
+            .container { padding: 28px 14px 36px; border-radius: 14px; }
+            .header h1 { font-size: 1.5rem; letter-spacing: 1px; }
+            .header h2 { font-size: 1rem; }
+            .slide img { height: 220px; }
+            .slide-caption { font-size: 0.85rem; padding: 10px 12px; }
+            .arrow { width: 36px; height: 36px; font-size: 1.2rem; }
+            .arrow-left  { left: 8px; }
+            .arrow-right { right: 8px; }
+        }
+
+        @media (min-width: 431px) and (max-width: 768px) {
+            body { padding: 70px 16px 36px; }
+            .container { padding: 32px 22px 44px; }
+            .header h1 { font-size: 1.8rem; }
+            .slide img { height: 320px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a class="back-link" href="default.html">&#8592; Back to Home</a>
+    <!-- Burger navigation -->
+    <button class="burger-btn" onclick="toggleNav()" aria-label="Open navigation">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+    </button>
+    <div class="nav-overlay" id="navOverlay" onclick="closeNav()"></div>
+    <nav class="nav-drawer" id="navDrawer">
+        <div class="nav-brand">
+            <div class="nav-brand-name">Jaya Spicy Kitchen</div>
+            <div class="nav-brand-tag">Authentic • Healthy • Flavorful</div>
+        </div>
+        <a class="nav-link" href="index.html">
+            <span class="nav-link-icon">🏠</span> Home
+        </a>
+        <a class="nav-link active" href="spicydishes.html">
+            <span class="nav-link-icon">🌶️</span> Spicy Kitchen
+        </a>
+        <a class="nav-link" href="cookingclass.html">
+            <span class="nav-link-icon">👨‍🍳</span> Cooking Class
+        </a>
+    </nav>
 
+    <div class="container">
         <div class="header">
             <h1>Jaya Spicy Kitchen</h1>
             <h2>Spicy Dishes</h2>
@@ -275,7 +386,6 @@
         const slidesEl = document.getElementById('slides');
         const dotsEl   = document.getElementById('dots');
 
-        // build dots
         for (let i = 0; i < total; i++) {
             const d = document.createElement('button');
             d.className = 'dot' + (i === 0 ? ' active' : '');
@@ -291,15 +401,22 @@
                 d.classList.toggle('active', i === current));
         }
 
-        function move(dir) {
-            resetAuto();
-            goTo(current + dir);
-        }
+        function move(dir) { resetAuto(); goTo(current + dir); }
 
         function resetAuto() {
             clearInterval(autoTimer);
             autoTimer = setInterval(() => goTo(current + 1), 4000);
         }
+
+        function toggleNav() {
+            document.getElementById('navDrawer').classList.toggle('open');
+            document.getElementById('navOverlay').classList.toggle('open');
+        }
+        function closeNav() {
+            document.getElementById('navDrawer').classList.remove('open');
+            document.getElementById('navOverlay').classList.remove('open');
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
 
         resetAuto();
     </script>
