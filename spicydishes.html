@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spicy Kitchen – Jaya Spicy Kitchen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #f5e6d3;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 860px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #1a0f0f 0%, #2a1515 100%);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(200, 100, 100, 0.4),
+                        0 0 40px rgba(218, 165, 32, 0.3);
+            border: 2px solid rgba(200, 100, 100, 0.6);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #DAA520;
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: #C86464; }
+
+        .header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            color: #DAA520;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .header h2 {
+            font-size: 1.3rem;
+            color: #C86464;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #DAA520, #C86464, #DAA520);
+            margin: 18px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ── Banner ── */
+        .banner {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid rgba(200, 100, 100, 0.5);
+            box-shadow: 0 10px 32px rgba(200, 100, 100, 0.4);
+            background: #0f0808;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.7s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-caption {
+            padding: 14px 24px;
+            background: rgba(20, 5, 5, 0.75);
+            color: #f5e6d3;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+            text-align: center;
+            border-bottom: 1px solid rgba(200, 100, 100, 0.35);
+        }
+
+        .slide-caption span {
+            color: #DAA520;
+            font-weight: bold;
+        }
+
+        /* nav arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(139, 0, 0, 0.65);
+            border: none;
+            color: #DAA520;
+            font-size: 1.6rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            line-height: 1;
+        }
+
+        .arrow:hover { background: rgba(200, 100, 100, 0.85); }
+        .arrow-left  { left: 14px; }
+        .arrow-right { right: 14px; }
+
+        /* dot indicators */
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(200, 100, 100, 0.35);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            border: none;
+        }
+
+        .dot.active {
+            background: #DAA520;
+            transform: scale(1.3);
+        }
+
+        @media (max-width: 600px) {
+            .slide img { height: 280px; }
+            .container { padding: 36px 18px; }
+            .header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="back-link" href="default.html">&#8592; Back to Home</a>
+
+        <div class="header">
+            <h1>Jaya Spicy Kitchen</h1>
+            <h2>Spicy Dishes</h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="banner">
+            <div class="slides" id="slides">
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Authentic Flavors</div>
+                    <img src="jayaspicykitchen001.jpeg" alt="Jaya Spicy Kitchen dish 1">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Healthy Food</div>
+                    <img src="jayaspicykitchen002.jpeg" alt="Jaya Spicy Kitchen dish 2">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Healthy Living</div>
+                    <img src="jayaspicykitchen003.jpeg" alt="Jaya Spicy Kitchen dish 3">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Traditional Recipes</div>
+                    <img src="jayaspicykitchen004.jpeg" alt="Jaya Spicy Kitchen dish 4">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Bold Spices</div>
+                    <img src="jayaspicykitchen005.jpeg" alt="Jaya Spicy Kitchen dish 5">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Rich Curries</div>
+                    <img src="jayaspicykitchen006.jpeg" alt="Jaya Spicy Kitchen dish 6">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Home-Style Cooking</div>
+                    <img src="jayaspicykitchen007.jpeg" alt="Jaya Spicy Kitchen dish 7">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Farm Fresh Ingredients</div>
+                    <img src="jayaspicykitchen008.jpeg" alt="Jaya Spicy Kitchen dish 8">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Vegetarian Specialties</div>
+                    <img src="jayaspicykitchen009.jpeg" alt="Jaya Spicy Kitchen dish 9">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Non-Vegetarian Delights</div>
+                    <img src="jayaspicykitchen010.jpeg" alt="Jaya Spicy Kitchen dish 10">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Probiotic &amp; Fermented</div>
+                    <img src="jayaspicykitchen011.jpeg" alt="Jaya Spicy Kitchen dish 11">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Gluten Free Options</div>
+                    <img src="jayaspicykitchen012.jpeg" alt="Jaya Spicy Kitchen dish 12">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Diabetic Friendly</div>
+                    <img src="jayaspicykitchen013.jpeg" alt="Jaya Spicy Kitchen dish 13">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Millet Varieties</div>
+                    <img src="jayaspicykitchen014.jpeg" alt="Jaya Spicy Kitchen dish 14">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Chicken Curry</div>
+                    <img src="jayaspicykitchen015.jpeg" alt="Jaya Spicy Kitchen dish 15">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Egg Dishes</div>
+                    <img src="jayaspicykitchen016.jpeg" alt="Jaya Spicy Kitchen dish 16">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — Eggplant Specialties</div>
+                    <img src="jayaspicykitchen017.jpeg" alt="Jaya Spicy Kitchen dish 17">
+                </div>
+                <div class="slide">
+                    <div class="slide-caption"><span>Jaya Spicy Kitchen</span> — And Much More…</div>
+                    <img src="jayaspicykitchen018.jpeg" alt="Jaya Spicy Kitchen dish 18">
+                </div>
+            </div>
+
+            <button class="arrow arrow-left"  onclick="move(-1)">&#8249;</button>
+            <button class="arrow arrow-right" onclick="move(1)">&#8250;</button>
+        </div>
+
+        <div class="dots" id="dots"></div>
+    </div>
+
+    <script>
+        const total = 18;
+        let current = 0;
+        let autoTimer;
+
+        const slidesEl = document.getElementById('slides');
+        const dotsEl   = document.getElementById('dots');
+
+        // build dots
+        for (let i = 0; i < total; i++) {
+            const d = document.createElement('button');
+            d.className = 'dot' + (i === 0 ? ' active' : '');
+            d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+            d.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(d);
+        }
+
+        function goTo(n) {
+            current = (n + total) % total;
+            slidesEl.style.transform = `translateX(-${current * 100}%)`;
+            document.querySelectorAll('.dot').forEach((d, i) =>
+                d.classList.toggle('active', i === current));
+        }
+
+        function move(dir) {
+            resetAuto();
+            goTo(current + dir);
+        }
+
+        function resetAuto() {
+            clearInterval(autoTimer);
+            autoTimer = setInterval(() => goTo(current + 1), 4000);
+        }
+
+        resetAuto();
+    </script>
+</body>
+</html>
