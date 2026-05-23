@@ -567,7 +567,12 @@
 
         function proceedToPayment() {
             const totalAmount = document.getElementById('totalAmount').textContent.replace('$', '');
-            window.open('https://checkout.square.site/', '_blank');
+            const width = 600;
+            const height = 800;
+            const left = (window.innerWidth - width) / 2;
+            const top = (window.innerHeight - height) / 2;
+            const squareUrl = 'https://square.link/u/bx5EZHZT';
+            window.open(squareUrl, 'Square Payment', `width=${width},height=${height},left=${left},top=${top},scrollbars=yes`);
         }
 
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
