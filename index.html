@@ -857,6 +857,9 @@
         <a class="nav-link" href="groceries.html">
             <span class="nav-link-icon">🛒</span> Groceries
         </a>
+        <a class="nav-link" href="payment.html">
+            <span class="nav-link-icon">💳</span> Payment
+        </a>
     </nav>
 
     <div class="container">
@@ -950,7 +953,17 @@
                     <div class="contact-label">📧 Email</div>
                     <a href="mailto:jayajayajc@gmail.com" class="contact-link">jayajayajc@gmail.com</a>
                 </div>
-                
+
+                <div class="contact-item">
+                    <div class="contact-label">💳 Zelle Payment</div>
+                    <div class="contact-link" style="cursor: pointer;" onclick="copyToClipboard('360.357.4860')">360.357.4860</div>
+                    <small style="color: #C86464; margin-top: 8px; display: block;">Click to copy phone number</small>
+                </div>
+
+                <div class="contact-item" style="text-align: center;">
+                    <a href="payment.html" class="contact-link" style="text-decoration: none; display: inline-block; padding: 10px 20px; background: linear-gradient(135deg, #C86464 0%, #8B0000 100%); color: white; border-radius: 20px; margin-top: 10px;">View All Payment Methods →</a>
+                </div>
+
                 <div class="modal-footer">
                     We'd love to hear from you!
                 </div>
@@ -958,6 +971,12 @@
         </div>
 
         <script>
+            function copyToClipboard(text) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Copied to clipboard!');
+                });
+            }
+
             function openContactModal() {
                 document.getElementById('contactModal').classList.add('show');
             }

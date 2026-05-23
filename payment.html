@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment – Jaya Spicy Kitchen</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            padding: 70px 20px 40px;
+            color: #f5e6d3;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 860px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #1a0f0f 0%, #2a1515 100%);
+            border-radius: 20px;
+            padding: 40px 40px 50px;
+            box-shadow: 0 20px 60px rgba(200, 100, 100, 0.4),
+                        0 0 40px rgba(218, 165, 32, 0.3);
+            border: 2px solid rgba(200, 100, 100, 0.6);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            color: #DAA520;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .header h2 {
+            font-size: 1.3rem;
+            color: #C86464;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #DAA520, #C86464, #DAA520);
+            margin: 18px auto 0;
+            border-radius: 2px;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .payment-card {
+            background: rgba(200, 100, 100, 0.1);
+            border: 2px solid rgba(200, 100, 100, 0.4);
+            border-radius: 14px;
+            padding: 28px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .payment-card:hover {
+            background: rgba(200, 100, 100, 0.2);
+            border-color: rgba(200, 100, 100, 0.7);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(200, 100, 100, 0.4);
+        }
+
+        .payment-icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+        }
+
+        .payment-method-name {
+            font-size: 1.4rem;
+            color: #DAA520;
+            font-weight: bold;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+        }
+
+        .payment-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #C86464;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            color: #DAA520;
+            font-weight: bold;
+            word-break: break-all;
+        }
+
+        .copy-button {
+            width: 100%;
+            padding: 10px;
+            background: rgba(218, 165, 32, 0.2);
+            border: 1px solid rgba(218, 165, 32, 0.5);
+            color: #DAA520;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .copy-button:hover {
+            background: rgba(218, 165, 32, 0.4);
+            border-color: rgba(218, 165, 32, 0.8);
+        }
+
+        .qr-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .qr-label {
+            font-size: 0.9rem;
+            color: #C86464;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .qr-code-image {
+            max-width: 180px;
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid rgba(200, 100, 100, 0.3);
+        }
+
+        .payment-calculator {
+            background: rgba(200, 100, 100, 0.08);
+            border: 2px solid rgba(200, 100, 100, 0.3);
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 30px;
+        }
+
+        .calculator-title {
+            font-size: 1.2rem;
+            color: #DAA520;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .payment-input-group {
+            margin-bottom: 18px;
+        }
+
+        .payment-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #C86464;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .payment-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(200, 100, 100, 0.4);
+            border-radius: 8px;
+            color: #DAA520;
+            font-size: 1rem;
+            font-family: 'Arial', sans-serif;
+            transition: border-color 0.2s;
+        }
+
+        .payment-input:focus {
+            outline: none;
+            border-color: rgba(200, 100, 100, 0.8);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .fee-breakdown {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+        }
+
+        .fee-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(200, 100, 100, 0.2);
+            font-size: 0.95rem;
+        }
+
+        .fee-row.total {
+            border-bottom: none;
+            border-top: 2px solid rgba(200, 100, 100, 0.4);
+            padding-top: 12px;
+            font-weight: bold;
+            color: #DAA520;
+            font-size: 1.05rem;
+        }
+
+        .calculator-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .payment-copy-btn, .payment-proceed-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .payment-copy-btn {
+            background: rgba(218, 165, 32, 0.2);
+            color: #DAA520;
+            border: 1px solid rgba(218, 165, 32, 0.5);
+        }
+
+        .payment-copy-btn:hover {
+            background: rgba(218, 165, 32, 0.4);
+        }
+
+        .payment-proceed-btn {
+            background: linear-gradient(135deg, #C86464 0%, #8B0000 100%);
+            color: white;
+        }
+
+        .payment-proceed-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(200, 100, 100, 0.5);
+        }
+
+        .payment-proceed-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .copy-success {
+            color: #90EE90;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #C86464 0%, #8B0000 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(200, 100, 100, 0.5);
+        }
+
+        /* ── Burger navigation ── */
+        .burger-btn {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 2000;
+            background: rgba(26, 15, 15, 0.94);
+            border: 2px solid rgba(200, 100, 100, 0.6);
+            border-radius: 10px;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 0;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .burger-btn:hover {
+            background: rgba(200, 100, 100, 0.2);
+            border-color: rgba(200, 100, 100, 0.9);
+        }
+        .burger-line {
+            width: 22px;
+            height: 2px;
+            background: #DAA520;
+            border-radius: 2px;
+        }
+        .nav-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1900;
+            background: rgba(0, 0, 0, 0.55);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .nav-overlay.open { opacity: 1; pointer-events: all; }
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100%;
+            z-index: 1950;
+            background: linear-gradient(180deg, #1a0f0f 0%, #2a1515 100%);
+            border-right: 2px solid rgba(200, 100, 100, 0.5);
+            box-shadow: 8px 0 32px rgba(0,0,0,0.5);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            padding: 80px 0 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        .nav-drawer.open { transform: translateX(0); }
+        .nav-brand {
+            text-align: center;
+            padding: 0 24px 24px;
+            border-bottom: 1px solid rgba(200, 100, 100, 0.25);
+            margin-bottom: 12px;
+        }
+        .nav-brand-name {
+            font-size: 0.95rem;
+            color: #DAA520;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .nav-brand-tag { font-size: 0.72rem; color: #C86464; letter-spacing: 1px; margin-top: 4px; }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 15px 28px;
+            color: #f5e6d3;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+            border-left: 3px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: rgba(200, 100, 100, 0.15);
+            color: #DAA520;
+            border-left-color: #DAA520;
+        }
+        .nav-link-icon { font-size: 1.25rem; width: 26px; text-align: center; }
+
+        @media (max-width: 600px) {
+            body { padding: 70px 12px 20px; }
+            .container { padding: 30px 20px 40px; border-radius: 14px; }
+            .header h1 { font-size: 1.6rem; letter-spacing: 1px; }
+            .header h2 { font-size: 1rem; letter-spacing: 1px; }
+            .payment-methods { grid-template-columns: 1fr; gap: 18px; }
+            .calculator-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Burger navigation -->
+    <button class="burger-btn" onclick="toggleNav()" aria-label="Open navigation">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+    </button>
+    <div class="nav-overlay" id="navOverlay" onclick="closeNav()"></div>
+    <nav class="nav-drawer" id="navDrawer">
+        <div class="nav-brand">
+            <div class="nav-brand-name">Jaya Spicy Kitchen</div>
+            <div class="nav-brand-tag">Authentic • Healthy • Flavorful</div>
+        </div>
+        <a class="nav-link" href="index.html">
+            <span class="nav-link-icon">🏠</span> Home
+        </a>
+        <a class="nav-link" href="spicydishes.html">
+            <span class="nav-link-icon">🌶️</span> Spicy Kitchen
+        </a>
+        <a class="nav-link" href="catering.html">
+            <span class="nav-link-icon">🍽️</span> Catering
+        </a>
+        <a class="nav-link" href="cookingclass.html">
+            <span class="nav-link-icon">👨‍🍳</span> Cooking Class
+        </a>
+        <a class="nav-link" href="groceries.html">
+            <span class="nav-link-icon">🛒</span> Groceries
+        </a>
+        <a class="nav-link active" href="payment.html">
+            <span class="nav-link-icon">💳</span> Payment
+        </a>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>💳 Payment Methods</h1>
+            <h2>Zelle & Square Payment Options</h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="payment-methods">
+            <!-- Zelle Payment -->
+            <div class="payment-card">
+                <div class="payment-icon">📱</div>
+                <div class="payment-method-name">Zelle</div>
+                <div class="payment-info">
+                    <div class="info-label">Phone Number</div>
+                    <div class="info-value">360.357.4860</div>
+                </div>
+                <button class="copy-button" onclick="copyToClipboard('360.357.4860', 'zelle')">📋 Copy Number</button>
+                <div id="zelleCopy" class="copy-success" style="display: none;">Copied to clipboard!</div>
+            </div>
+
+            <!-- Square Payment -->
+            <div class="payment-card">
+                <div class="payment-icon">💰</div>
+                <div class="payment-method-name">Square</div>
+                <div class="qr-section">
+                    <div class="qr-label">Scan to Pay</div>
+                    <img src="checkout-link-qr-code.png" alt="Square Payment QR Code" class="qr-code-image">
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Calculator for Square -->
+        <div class="payment-calculator">
+            <div class="calculator-title">💵 Square Payment Calculator</div>
+
+            <div class="payment-input-group">
+                <label class="payment-label">Product Net Amount ($)</label>
+                <input type="number" id="amountInput" class="payment-input" placeholder="0.00" min="0" step="0.01" oninput="calculateFees()">
+            </div>
+
+            <div class="fee-breakdown">
+                <div class="fee-row">
+                    <span>Net Amount (What you receive):</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <div class="fee-row">
+                    <span>Sales Tax (9.8%):</span>
+                    <span id="salesTax">$0.00</span>
+                </div>
+                <div class="fee-row">
+                    <span>Online Service Fee (2.6% + $0.15):</span>
+                    <span id="serviceFee">$0.00</span>
+                </div>
+                <div class="fee-row total">
+                    <span>Total to Charge Card:</span>
+                    <span id="totalAmount">$0.00</span>
+                </div>
+            </div>
+
+            <div class="calculator-buttons">
+                <button class="payment-copy-btn" onclick="copyAmountToClipboard()">📋 Copy Amount</button>
+                <button class="payment-proceed-btn" id="proceedBtn" onclick="proceedToPayment()" disabled>Proceed to Payment</button>
+            </div>
+            <div id="copySuccess" class="copy-success" style="display: none;">Amount copied to clipboard!</div>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="back-button" onclick="window.location.href='index.html'">← Back to Home</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleNav() {
+            const drawer = document.getElementById('navDrawer');
+            const overlay = document.getElementById('navOverlay');
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('open');
+        }
+
+        function closeNav() {
+            document.getElementById('navDrawer').classList.remove('open');
+            document.getElementById('navOverlay').classList.remove('open');
+        }
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', closeNav);
+        });
+
+        function copyToClipboard(text, id) {
+            navigator.clipboard.writeText(text).then(() => {
+                const successDiv = document.getElementById(id + 'Copy');
+                successDiv.style.display = 'block';
+                setTimeout(() => {
+                    successDiv.style.display = 'none';
+                }, 2000);
+            });
+        }
+
+        function calculateFees() {
+            const amountInput = document.getElementById('amountInput');
+            const netAmount = parseFloat(amountInput.value) || 0;
+
+            const chargeAmount = (netAmount + 0.15) / 0.876;
+            const salesTax = chargeAmount * 0.098;
+            const serviceFee = (chargeAmount * 0.026) + 0.15;
+
+            document.getElementById('subtotal').textContent = '$' + netAmount.toFixed(2);
+            document.getElementById('salesTax').textContent = '$' + salesTax.toFixed(2);
+            document.getElementById('serviceFee').textContent = '$' + serviceFee.toFixed(2);
+            document.getElementById('totalAmount').textContent = '$' + chargeAmount.toFixed(2);
+
+            document.getElementById('proceedBtn').disabled = netAmount <= 0;
+        }
+
+        function copyAmountToClipboard() {
+            const totalAmount = document.getElementById('totalAmount').textContent.replace('$', '');
+            navigator.clipboard.writeText(totalAmount).then(() => {
+                const successDiv = document.getElementById('copySuccess');
+                successDiv.style.display = 'block';
+                setTimeout(() => {
+                    successDiv.style.display = 'none';
+                }, 2000);
+            });
+        }
+
+        function proceedToPayment() {
+            const totalAmount = document.getElementById('totalAmount').textContent.replace('$', '');
+            window.open('https://checkout.square.site/', '_blank');
+        }
+
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+    </script>
+</body>
+</html>
